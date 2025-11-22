@@ -1,0 +1,186 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+}
+
+body {
+  background-image: url("../Task/img/bg.jpg");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.caculator {
+  display: flex;
+  width: 400px;
+  height: 350px;
+}
+
+.calculator {
+  width: 300px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#display {
+  width: 100%;
+  height: 40px;
+  font-size: 24px;
+  text-align: right;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  height: 40px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+
+/* 
+let display = document.getElementById('display');
+let currentValue = '';
+let previousValue = '';
+let operation = '';
+
+document.getElementById('clear').addEventListener('click', () => {
+    currentValue = '';
+    previousValue = '';
+    operation = '';
+    display.value = '';
+});
+
+document.getElementById('backspace').addEventListener('click', () => {
+    currentValue = currentValue.slice(0, -1);
+    display.value = currentValue;
+});
+
+document.getElementById('divide').addEventListener('click', () => {
+    previousValue = currentValue;
+    currentValue = '';
+    operation = '/';
+});
+
+document.getElementById('multiply').addEventListener('click', () => {
+    previousValue = currentValue;
+    currentValue = '';
+    operation = '*';
+});
+
+document.getElementById('subtract').addEventListener('click', () => {
+    previousValue = currentValue;
+    currentValue = '';
+    operation = '-';
+});
+
+document.getElementById('add').addEventListener('click', () => {
+    previousValue = currentValue;
+    currentValue = '';
+    operation = '+';
+});
+
+document.getElementById('equals').addEventListener('click', () => {
+    let result;
+    switch (operation) {
+        case '+':
+            result = parseFloat(previousValue) + parseFloat(currentValue);
+            break;
+        case '-':
+            result = parseFloat(previousValue) - parseFloat(currentValue);
+            break;
+        case '*':
+            result = parseFloat(previousValue) * parseFloat(currentValue);
+            break;
+        case '/':
+            result = parseFloat(previousValue) / parseFloat(currentValue);
+            break;
+        default:
+            result = '';
+    }
+    display.value = result;
+    currentValue = result;
+    previousValue = '';
+    operation = '';
+});
+
+document.getElementById('zero').addEventListener('click', () => {
+    currentValue += '0';
+    display.value = currentValue;
+});
+
+document.getElementById('one').addEventListener('click', () => {
+    currentValue += '1';
+    display.value = currentValue;
+});
+
+document.getElementById('two').addEventListener('click', () => {
+    currentValue += '2';
+    display.value = currentValue;
+});
+
+document.getElementById('three').addEventListener('click', () => {
+    currentValue += '3';
+    display.value = currentValue;
+});
+
+document.getElementById('four').addEventListener('click', () => {
+    currentValue += '4';
+    display.value = currentValue;
+});
+
+document.getElementById('five').addEventListener('click', () => {
+    currentValue += '5';
+    display.value = currentValue;
+});
+
+document.getElementById('six').addEventListener('click', () => {
+    currentValue += '6';
+    display.value = currentValue;
+});
+
+document.getElementById('seven').addEventListener('click', () => {
+    currentValue += '7';
+    display.value = currentValue;
+});
+
+document.getElementById('eight').addEventListener('click', () => {
+    currentValue += '8';
+    display.value = currentValue;
+});
+
+document.getElementById('nine').addEventListener('click', () => {
+    currentValue += '9';
+    display.value = currentValue;
+});
+
+document.getElementById('decimal').addEventListener('click', () => {
+    if (!currentValue.includes('.')) {
+        currentValue += '.';
+        display.value = currentValue;
+    }
+});
+```
+
+*/

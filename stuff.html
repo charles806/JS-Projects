@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lucky Draw Game</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        padding: 40px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 450px;
+        text-align: center;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 1s ease-out;
+      }
+
+      h1 {
+        color: white;
+        margin-bottom: 20px;
+      }
+
+      button {
+        background: radial-gradient(circle, #ffd700, #ffa500);
+        border: none;
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        box-shadow: 0 0 20px #ffd700, 0 0 40px #ffa500;
+      }
+
+      button:hover {
+        transform: scale(1.08);
+        box-shadow: 0 0 25px #fff4a3, 0 0 55px #ffae00;
+      }
+
+      #result {
+        margin-top: 25px;
+        font-size: 1.3rem;
+        font-weight: 500;
+        min-height: 40px;
+        color: #fff;
+        transition: opacity 0.5s ease;
+      }
+
+      #history {
+        margin-top: 20px;
+        font-size: 0.95rem;
+        color: #fff;
+        max-height: 150px;
+        overflow-y: auto;
+        text-align: left;
+      }
+
+      .history-item {
+        margin-bottom: 5px;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 6px 10px;
+        border-radius: 8px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>🎡 Lucky Draw Game</h1>
+      <button onclick="startSpin()">Spin for Prize!</button>
+      <div id="result">Click spin to start!</div>
+      <div id="history"></div>
+    </div>
+
+    <script>
+      const prizes = [
+        "🏆 Grand Prize - $1000!",
+        "🎮 Gaming Console",
+        "📱 Smartphone",
+        "☕ Coffee Mug",
+        "😢 Better luck next time!",
+        "💸 You win nothing!",
+      ];
+
+      const resultDiv = document.getElementById("result");
+      const historyDiv = document.getElementById("history");
+
+      function spinPrize() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            const randomIndex = Math.floor(Math.random() * prizes.length);
+            const prize = prizes[randomIndex];
+
+            if (Math.random() < 0.1) {
+              reject("Technical Error");
+            } else {
+              resolve(prize);
+            }
+          }, 2000);
+        });
+      }
+
+      async function startSpin() {
+        resultDiv.style.opacity = 0;
+        resultDiv.innerHTML = "🎡 Spinning...";
+        resultDiv.style.opacity = 1;
+
+        try {
+          const prize = await spinPrize();
+          resultDiv.innerHTML = `🎉 You won: ${prize}`;
+          addToHistory(prize);
+        } catch (error) {
+          resultDiv.innerHTML = `❌ Oops! ${error}`;
+        }
+      }
+
+      function addToHistory(prize) {
+        const item = document.createElement("div");
+        item.className = "history-item";
+        item.textContent = `🎁 ${prize}`;
+        historyDiv.prepend(item); // newest first
+      }
+    </script>
+  </body>
+</html>

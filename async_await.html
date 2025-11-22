@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <a href="breakFastMaker.html">Click
+        
+    </a>
+    <script>
+      function walkDog() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            const dogWalked = true;
+
+            if (dogWalked) {
+              resolve("You walked the Dog");
+            } else {
+              reject("You no walk Dog");
+            }
+          }, 1000);
+        });
+      }
+
+      function washPlate() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            const plateWashed = true;
+
+            if (plateWashed) {
+              resolve("You Washed the Plate");
+            } else {
+              reject("You no Wash Plate");
+            }
+          }, 2000);
+        });
+      }
+
+      function takeOutTrash() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            const trashTakenOut = true;
+
+            if (trashTakenOut) {
+              resolve("You Took Out the Trash");
+            } else {
+              reject("You no carry Trash");
+            }
+          }, 500);
+        });
+      }
+
+      async function choresDone() {
+        try {
+          const walkDogResult = await walkDog();
+          console.log(walkDogResult);
+          const plateResult = await washPlate();
+          console.log(plateResult);
+          const trashResult = await takeOutTrash();
+          console.log(trashResult);
+        } catch (error) {
+          console.error("Chore failed:", error);
+        }
+      }
+
+      choresDone();
+    </script>
+  </body>
+</html>

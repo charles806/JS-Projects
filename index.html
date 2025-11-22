@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Hub</title>
+
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .container {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 20px;
+        width: 95%;
+        max-width: 500px;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        animation: fadeIn 0.8s ease;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+        font-size: 2rem;
+        color: #333;
+      }
+
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        padding: 14px;
+        border-radius: 12px;
+        text-decoration: none;
+        background: #f1faff;
+        color: #333;
+        font-size: 1.1rem;
+        font-weight: 500;
+
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: 0.3s ease;
+      }
+
+      a:hover {
+        transform: translateY(-4px);
+        background: #dff4ff;
+      }
+
+      a i {
+        font-size: 1.3rem;
+        color: #0077ff;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>My Projects</h1>
+
+      <div class="links">
+        <a href="breakFastMaker.html"><i class="fa-solid fa-mug-hot"></i> Breakfast Maker</a>
+        <a href="bank.html"><i class="fa-solid fa-building-columns"></i> Bank App</a>
+        <a href="fileDownload.html"><i class="fa-solid fa-file-arrow-down"></i> Fortunes</a>
+        <a href="stuff.html"><i class="fa-solid fa-ticket"></i> Lotto</a>
+        <a href="fetch.html"><i class="fa-solid fa-plug-circle-bolt"></i> API Fetch</a>
+        <a href="Task/index.html"><i class="fa-solid fa-list-check"></i> Task Manager</a>
+        <a href="QuizApp/index.html"><i class="fa-solid fa-circle-question"></i> Quiz App</a>
+        <a href="countdown/index.html"><i class="fa-solid fa-clock"></i> Countdown</a>
+        <a href="weatherApp.html"><i class="fa-solid fa-cloud-sun"></i> Weather App</a>
+      </div>
+    </div>
+  </body>
+</html>

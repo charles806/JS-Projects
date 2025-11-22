@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fortune Teller</title>
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .box {
+        background: #ffffff22;
+        backdrop-filter: blur(10px);
+        padding: 40px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 400px;
+        color: white;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        animation: fadeIn 0.9s ease-out;
+      }
+
+      button {
+        background: radial-gradient(circle, #ffdd55, #ff9900);
+        border: none;
+        padding: 15px 25px;
+        font-size: 1.2rem;
+        color: #4b2a00;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 0 20px #ffdd55, 0 0 40px #ff9900;
+        transition: 0.3s ease-in-out;
+      }
+
+      button:hover {
+        transform: scale(1.08);
+        box-shadow: 0 0 25px #fff4a3, 0 0 55px #ffae00;
+      }
+
+      #fortune {
+        margin-top: 25px;
+        font-size: 1.3rem;
+        font-weight: 500;
+        min-height: 40px;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+      }
+
+      .show {
+        opacity: 1;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="box">
+      <h1>🔮 Fortune Teller</h1>
+      <p>Tap the crystal ball to know your destiny ✨</p>
+
+      <br />
+
+      <button onclick="getFortune()">🔮 Get Fortune</button>
+
+      <div id="fortune">Click the button!</div>
+    </div>
+
+    <script>
+      const fortunes = [
+        "You will receive a pleasant surprise soon! 🎁",
+        "A new opportunity is coming your way! 🌟",
+        "Someone will appreciate your kindness today 💕",
+        "Your hard work will pay off very soon! 🏆",
+        "A long-awaited message will arrive 📩",
+        "Good luck will follow you today 🍀",
+        "You will learn something valuable today 📚",
+        "A dream you have will start coming true 🌈",
+        "Someone will think highly of you today 🤝",
+        "Your energy will attract good people ✨",
+        "You will soon celebrate something wonderful 🎊",
+        "A hidden blessing is coming to light 🌤️",
+        "You will discover a new talent 🎨",
+        "Today is a perfect day for a fresh start 🌱",
+        "Someone will speak well about you behind your back 🗣️😊",
+        "You will avoid a big problem without knowing 😮‍💨",
+        "A happy moment from the past will return 💭💛",
+        "You will receive unexpected support 🤝",
+        "Your patience will bring reward soon 🕊️",
+        "Someone is silently proud of you 🌟",
+        "Your smile will make someone’s day today 😊",
+        "You will receive clarity about something confusing 🔍",
+        "You’re getting closer to something amazing 🔥",
+        "A lucky encounter will happen soon ✨",
+        "Something you lost will return to you 🔄",
+        "You will hear good news before the week ends 📰✨",
+        "A peaceful moment will restore your energy ☀️",
+        "You’re entering a season of blessings 🎉",
+        "Something great is aligning for you 🌌",
+        "Your future self is proud of you 🌟",
+      ];
+
+      function getFortune() {
+        const fortuneDiv = document.getElementById("fortune");
+
+        // show loading text immediately
+        fortuneDiv.innerHTML = "⏳ Consulting the spirits...";
+        fortuneDiv.classList.add("show");
+
+        const fortunePromise = new Promise((resolve, reject) => {
+          setTimeout(() => {
+            const randomIndex = Math.floor(Math.random() * fortunes.length);
+            const fortune = fortunes[randomIndex];
+
+            if (Math.random() < 0.8) {
+              resolve(fortune);
+            } else {
+              reject("The crystals are cloudy... Try again! 🌫️");
+            }
+          }, 2000);
+        });
+
+        fortunePromise
+          .then((fortune) => {
+            fortuneDiv.innerHTML = `✨ ${fortune}`;
+          })
+          .catch((error) => {
+            fortuneDiv.innerHTML = `❌ ${error}`;
+          });
+      }
+    </script>
+  </body>
+</html>

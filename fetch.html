@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon Fetcher</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #ff6f91, #ff9671);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(15px);
+        padding: 40px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      }
+
+      h1 {
+        color: white;
+        margin-bottom: 20px;
+      }
+
+      input {
+        padding: 10px 15px;
+        border-radius: 12px;
+        border: none;
+        width: 70%;
+        font-size: 1rem;
+        margin-right: 10px;
+        outline: none;
+      }
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 12px;
+        background: #ffd700;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+
+      button:hover {
+        background: #ffb700;
+        transform: scale(1.05);
+      }
+
+      #pokeSprite {
+        margin-top: 20px;
+        height: 150px;
+        width: 150px;
+        display: none;
+        transition: transform 0.3s ease;
+      }
+
+      #pokeNameDisplay {
+        margin-top: 10px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #fff;
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>⚡ Pokémon Fetcher</h1>
+      <input type="text" id="pokeName" placeholder="Enter Pokémon name" />
+      <button onclick="getData()">Fetch</button>
+
+      <div id="pokeNameDisplay"></div>
+      <img id="pokeSprite" src="" alt="Pokémon Sprite" />
+    </div>
+
+    <script>
+      async function getData() {
+        const pokeInput = document.getElementById("pokeName");
+        const pokemonName = pokeInput.value.toLowerCase().trim();
+        const imgElement = document.getElementById("pokeSprite");
+        const nameDisplay = document.getElementById("pokeNameDisplay");
+
+        if (!pokemonName) {
+          alert("Please enter a Pokémon name!");
+          return;
+        }
+
+        try {
+          const res = await fetch(
+            `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+          );
+
+          if (!res.ok) {
+            throw new Error("Pokémon not found! 🚫");
+          }
+
+          const data = await res.json();
+          const pokeSprite = data.sprites.front_default;
+
+          imgElement.src = pokeSprite;
+          imgElement.style.display = "block";
+          imgElement.style.transform = "scale(1.2)";
+          setTimeout(() => (imgElement.style.transform = "scale(1)"), 300);
+
+          nameDisplay.textContent = data.name;
+        } catch (error) {
+          console.log(error);
+          imgElement.style.display = "none";
+          nameDisplay.textContent = "";
+          alert("Pokémon not found! Try: pikachu, charizard, bulbasaur");
+        }
+      }
+    </script>
+  </body>
+</html>

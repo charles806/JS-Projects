@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Async Breakfast Maker</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .container {
+        background: #ffffffdd;
+        backdrop-filter: blur(10px);
+        padding: 30px;
+        width: 90%;
+        max-width: 500px;
+        text-align: center;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        animation: fadeIn 0.8s ease-out;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      button {
+        padding: 12px 25px;
+        background: #ff7f50;
+        border: none;
+        color: white;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        margin: 15px 0;
+        transition: 0.3s ease;
+        font-weight: bold;
+        box-shadow: 0 6px 12px rgba(255, 127, 80, 0.4);
+      }
+
+      button:hover {
+        background: #ff6a32;
+        transform: translateY(-3px);
+      }
+
+      #status {
+        margin-top: 20px;
+        background: #f7f7f7;
+        padding: 20px;
+        border-radius: 12px;
+        min-height: 150px;
+        max-height: 220px;
+        overflow-y: auto;
+        font-size: 1rem;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        line-height: 1.5;
+      }
+
+      .success {
+        color: #128f12;
+        font-weight: 600;
+      }
+
+      .error {
+        color: #d10000;
+        font-weight: 600;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>🍳 Async Breakfast Maker</h1>
+      <p>Watch your breakfast prepare itself — step by step!</p>
+
+      <button onclick="makeBreakfast()">Start Making Breakfast</button>
+
+      <div id="status">Click the button to start cooking!</div>
+    </div>
+
+    <script>
+      function makeEggs() {
+        return new Promise((res, rej) => {
+          setTimeout(() => {
+            Math.random() > 0.2
+              ? res("🥚 ➜ Egg is Ready!")
+              : rej("🔥 Egg Don Burn!");
+          }, 2000);
+        });
+      }
+
+      function makeCoffee() {
+        return new Promise((res, rej) => {
+          setTimeout(() => {
+            Math.random() > 0.2
+              ? res("☕ ➜ Coffee is Ready!")
+              : rej("💥 Coffee machine don spoil!");
+          }, 3000);
+        });
+      }
+
+      function toastBread() {
+        return new Promise((res, rej) => {
+          setTimeout(() => {
+            Math.random() > 0.2
+              ? res("🍞 ➜ Bread is Toasted!")
+              : rej("🔥 Toaster don burn bread!");
+          }, 3000);
+        });
+      }
+
+      function pourJuice() {
+        return new Promise((resolve) => {
+          setTimeout(() => resolve("🧃 ➜ Juice Poured!"), 500);
+        });
+      }
+
+      function updateStatus(message, type = "") {
+        const statusDiv = document.getElementById("status");
+        statusDiv.innerHTML += `<div class="${type}">${message}</div>`;
+        statusDiv.scrollTop = statusDiv.scrollHeight;
+      }
+
+      async function makeBreakfast() {
+        const statusDiv = document.getElementById("status");
+        statusDiv.innerHTML = "🍽️ Starting breakfast preparation...<br><br>";
+
+        try {
+          const coffee = await makeCoffee();
+          updateStatus(coffee, "success");
+
+          const eggs = await makeEggs();
+          updateStatus(eggs, "success");
+
+          const toast = await toastBread();
+          updateStatus(toast, "success");
+
+          const juice = await pourJuice();
+          updateStatus(juice, "success");
+
+          updateStatus("<br>🎉 Breakfast is served! Enjoy! 🍽️", "success");
+        } catch (error) {
+          updateStatus(error, "error");
+          updateStatus("😢 Breakfast failed! Maybe order takeout? 🍕", "error");
+        }
+      }
+    </script>
+  </body>
+</html>
